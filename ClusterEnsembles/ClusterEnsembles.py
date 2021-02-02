@@ -81,7 +81,6 @@ def hbgf(base_clusters, nclass):
     celabel: concensus clustering label obtained from HBGF
     """
     A = create_hypergraph(base_clusters)
-    A = A.astype(int)
     rowA, colA = A.shape
 
     W = np.vstack([np.hstack([np.zeros((colA, colA)), A.T]), np.hstack([A, np.zeros((rowA, rowA))])])
