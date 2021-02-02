@@ -33,7 +33,7 @@ TODO
 
 - Bayesian cluster ensembles [3]
 
-Similer Project
+Similar Project
 ---------------
 
 `GGiecold/Cluster_Ensembles`: https://github.com/GGiecold/Cluster_Ensembles
