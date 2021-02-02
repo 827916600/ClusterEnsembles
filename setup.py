@@ -1,9 +1,13 @@
 from setuptools import setup, find_packages
 
 
+VERSION = '0.1.0'
+__version__ = VERSION
+
+
 setup(
     name='ClusterEnsembles',  
-    version='0.1.0',  
+    version=__version__,  
     packages=find_packages(),  
 
     author='Takehiro Sano',  
