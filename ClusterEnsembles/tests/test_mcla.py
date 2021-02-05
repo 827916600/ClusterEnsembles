@@ -13,7 +13,7 @@ class AlgsTest(unittest.TestCase):
         base_clusters = np.array([
             [1, 1, 1, 2, 2, 3, 3],
             [2, 2, 2, 3, 3, 1, 1],
-            [1, 1, 2, 2, 3, 3, 3],
+            [4, 4, 2, 2, 3, 3, 3],
             [1, 2, np.nan, 1, 2, np.nan, np.nan]
         ])
         label_true = np.array([1, 1, 1, 2, 2, 3, 3])

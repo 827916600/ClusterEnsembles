@@ -19,19 +19,19 @@ def create_hypergraph(base_clusters):
     
     Return
     -------
-    H: incidence matrix
+    H: incidence matrix of base clusters' hypergraph
     """
     H = None
-    bc_len = base_clusters.shape[1]
+    len_bcs = base_clusters.shape[1]
 
-    for base_cluster in base_clusters:
-        bc_types = np.unique(base_cluster[~np.isnan(base_cluster)])
-        bc_types_len = len(bc_types)
-        bc2id = dict(zip(bc_types, np.arange(bc_types_len)))
-        h = np.zeros((bc_len, bc_types_len))
-        for i, bc_elem in enumerate(base_cluster):
-            if not np.isnan(bc_elem):
-                h[i, bc2id[bc_elem]] = 1.0
+    for bc in base_clusters:
+        unique_bc = np.unique(bc[~np.isnan(bc)])
+        len_unique_bc = len(unique_bc)
+        bc2id = dict(zip(unique_bc, np.arange(len_unique_bc)))
+        h = np.zeros((len_bcs, len_unique_bc))
+        for i, elem_bc in enumerate(bc):
+            if not np.isnan(elem_bc):
+                h[i, bc2id[elem_bc]] = 1.0
         if H is None:
             H = h
         else:
@@ -105,7 +105,10 @@ def cluster_ensembles(base_clusters, nclass=None, solver='hbgf', verbose=False):
     celabel: concensus clustering label obtained from HBGF
     """
     if nclass is None:
-        nclass = len(np.unique(base_clusters[~np.isnan(base_clusters)]))
+        nclass = -1
+        for bc in base_clusters:
+            len_unique_bc = len(np.unique(bc[~np.isnan(bc)]))
+            nclass = max(nclass, len_unique_bc)
 
     if verbose:
         print('Cluster Ensembles')
