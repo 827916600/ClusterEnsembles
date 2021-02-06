@@ -30,7 +30,7 @@ Usage
 
 >>> base_clusters = np.array([base_cluster1, base_cluster2, base_cluster3, base_cluster4])
 
->>> celabel = CE.cluster_ensembles(base_clusters, nclass=10, solver='hbgf')
+>>> celabel = CE.cluster_ensembles(base_clusters, nclass=3, solver='hbgf')
 
 >>> print(celabel)
 [0 0 0 2 2 1 1]
