@@ -16,11 +16,24 @@ Usage
 -----
 
 ```python
->>> import ClusterEnsembles as CE
+>>> import numpy as np
 
->>> base_clusters = np.random.randint(0, 9, (10, 1000))
+>>> import ClusterEnsembles as CE 
+
+>>> base_cluster1 = np.array([1, 1, 1, 2, 2, 3, 3])
+
+>>> base_cluster2 = np.array([2, 2, 2, 3, 3, 1, 1])
+
+>>> base_cluster3 = np.array([4, 4, 2, 2, 3, 3, 3])
+
+>>> base_cluster4 = np.array([1, 2, np.nan, 1, 2, np.nan, np.nan]) # `np.nan`: missing value
+
+>>> base_clusters = np.array([base_cluster1, base_cluster2, base_cluster3, base_cluster4])
 
 >>> celabel = CE.cluster_ensembles(base_clusters, nclass=10, solver='hbgf')
+
+>>> print(celabel)
+[0 0 0 2 2 1 1]
 ```
 
 - `nclass`: Number of classes in a consensus cluster
