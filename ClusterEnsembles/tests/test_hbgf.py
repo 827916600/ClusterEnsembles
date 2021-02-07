@@ -7,7 +7,7 @@ from sklearn.metrics import normalized_mutual_info_score
 import ClusterEnsembles as CE
 
 
-class AlgsTest(unittest.TestCase):
+class HBGFTest(unittest.TestCase):
 
     def test_hbgf(self):
         base_clusters = np.array([
