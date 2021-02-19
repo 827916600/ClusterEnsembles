@@ -39,6 +39,31 @@ def create_hypergraph(base_clusters):
     return H
 
 
+def to_pymetis_format(adj_mat):
+    """Transform an adjacency matrix into the pymetis format
+    
+    Parameter
+    ---------
+    adj_mat: adjacency matrix 
+    
+    Returns
+    -------
+    xadj, adjncy, eweights: parameters for pymetis
+    """
+    xadj = [0]
+    adjncy = []
+    eweights = []
+
+    for row in adj_mat:
+        idx = np.nonzero(row)[0]
+        val = row[idx]
+        adjncy += list(idx)
+        eweights += list(val)
+        xadj.append(len(adjncy))
+    
+    return xadj, adjncy, eweights
+
+
 def mcla(base_clusters, nclass):
     """Meta-CLustering Algorithm (MCLA)
     
@@ -56,8 +81,12 @@ def mcla(base_clusters, nclass):
 
     pair_dist_jac = pairwise_distances(X=H.T, metric='jaccard', n_jobs=-1)
     S = np.ones_like(pair_dist_jac) - pair_dist_jac
+    S *= 1e4 / max(1e-6, np.min(S[np.nonzero(S)]))
+    S = S.astype(int)
 
-    membership = pymetis.part_graph(nparts=nclass,  adjacency=nx.Graph(S))[1]
+    xadj, adjncy, eweights = to_pymetis_format(S)
+
+    membership = pymetis.part_graph(nparts=nclass, xadj=xadj, adjncy=adjncy, eweights=eweights)[1]
 
     meta_clusters = np.zeros((base_clusters.shape[1], nclass))
     for i, v in enumerate(membership):
@@ -85,7 +114,9 @@ def hbgf(base_clusters, nclass):
 
     W = np.vstack([np.hstack([np.zeros((colA, colA)), A.T]), np.hstack([A, np.zeros((rowA, rowA))])])
 
-    membership = pymetis.part_graph(nparts=nclass, adjacency=nx.Graph(W))[1]
+    xadj, adjncy, _ = to_pymetis_format(W)
+
+    membership = pymetis.part_graph(nparts=nclass, xadj=xadj, adjncy=adjncy, eweights=None)[1]
     
     celabel = np.array(membership[colA:])
 
