@@ -43,7 +43,7 @@ Simple example of cluster ensembles in the reference [1]
 ```
 
 - `nclass`: Number of classes in a consensus cluster
-- `solver`: {'cspa', 'mcla', 'hbgf'}
+- `solver`: {'cspa', 'mcla', 'hbgf', 'nmf'}
     
     `cspa`: Cluster-based Similarity Partitioning Algorithm [1]
 
