@@ -55,7 +55,7 @@ Simple example of cluster ensembles in the reference [1]
 
     **Note:** Please use `hbgf` for large-scale `base_clusters`.
 
-Similar Project
+Similar Package
 ---------------
 
 `GGiecold/Cluster_Ensembles`: https://github.com/GGiecold/Cluster_Ensembles
