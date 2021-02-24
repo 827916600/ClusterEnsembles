@@ -103,7 +103,7 @@ def mcla(base_clusters, nclass):
 
     pair_dist_jac = pairwise_distances(X=H.T, metric='jaccard', n_jobs=-1)
     S = np.ones_like(pair_dist_jac) - pair_dist_jac
-    S *= 1e4 / max(1e-6, np.min(S[np.nonzero(S)]))
+    S *= 1e3
     S = S.astype(int)
 
     xadj, adjncy, eweights = to_pymetis_format(S)
