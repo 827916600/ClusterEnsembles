@@ -53,6 +53,7 @@ Simple example of cluster ensembles in the reference [1]
 
     `nmf`: NMF-based consensus clustering [4]
 
+    **Note:** Please use `hbgf` for large-scale `base_clusters`.
 
 Similar Project
 ---------------
