@@ -164,7 +164,7 @@ def create_connectivity_matrix(base_clusters):
     return M
 
 
-def orthogonal_nmf_algorithm(W, nclass, maxiter=500):
+def orthogonal_nmf_algorithm(W, nclass, maxiter):
     """Algorithm for bi-orthogonal three-factor NMF problem
     
     Parameters
@@ -191,7 +191,7 @@ def orthogonal_nmf_algorithm(W, nclass, maxiter=500):
     return Q, S
 
 
-def nmf(base_clusters, nclass):
+def nmf(base_clusters, nclass, maxiter=200):
     """NMF-based consensus clustering
     
     Parameters
@@ -204,7 +204,7 @@ def nmf(base_clusters, nclass):
     celabel: concensus clustering label obtained from NMF
     """
     M = create_connectivity_matrix(base_clusters)
-    Q, S = orthogonal_nmf_algorithm(M, nclass)
+    Q, S = orthogonal_nmf_algorithm(M, nclass, maxiter)
     celabel = np.argmax(np.dot(Q, np.sqrt(S)), axis=1)
     return celabel
 
