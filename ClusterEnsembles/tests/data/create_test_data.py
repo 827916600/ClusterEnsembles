@@ -5,7 +5,7 @@ from sklearn.cluster import KMeans
 
 np.random.seed(0)
 
-locs = [-10, -5, 0, 5, 10]
+locs = [-8, -4, 0, 4, 8]
 for i, loc in enumerate(locs):
     normal = np.random.normal(loc=loc, scale=1.0, size=1600).reshape(200, 8)
     if i == 0:
