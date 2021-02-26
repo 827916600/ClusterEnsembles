@@ -1,4 +1,6 @@
 language: python
+notifications:
+  email: false
 python:
   - 3.8.7
 before_install:
