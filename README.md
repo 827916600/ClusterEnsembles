@@ -54,7 +54,7 @@ Simple example of cluster ensembles in the reference [1]
 
     `nmf`: NMF-based consensus clustering [4]
 
-    `all`: Use all solvers, and then return the consensus clustering label that gives the smallest objective function value. 
+    `all`: Use all solvers, and then return the consensus clustering label with the smallest objective function value. 
 
     **Note:** Please use `hbgf` for large-scale `base_clusters`.
 
