@@ -4,6 +4,7 @@
 #   License: MIT License
 
 
+import warnings
 import numpy as np
 import pymetis
 from sklearn.metrics import pairwise_distances, normalized_mutual_info_score
@@ -257,6 +258,8 @@ def cluster_ensembles(base_clusters, nclass=None, solver='hbgf', verbose=False):
         raise ValueError('Number of class must be a positive integer; got (nclass={})'.format(nclass))
 
     if solver == 'cspa':
+        if base_clusters.shape[1] > 5000:
+            warnings.warn('`base_clusters.shape[1]` is too large, so use another solvers.')
         celabel = cspa(base_clusters, nclass)
     elif solver == 'mcla':
         celabel = mcla(base_clusters, nclass)
@@ -265,10 +268,10 @@ def cluster_ensembles(base_clusters, nclass=None, solver='hbgf', verbose=False):
     elif solver == 'nmf':
         celabel = nmf(base_clusters, nclass)
     elif solver == 'all':
-        if base_clusters.shape[1] < 5000:
-            ce_solvers = [cspa, mcla, hbgf, nmf]
-        else:
+        if base_clusters.shape[1] > 5000:
             ce_solvers = [mcla, hbgf, nmf]
+        else:
+            ce_solvers = [cspa, mcla, hbgf, nmf]
         best_objv = None
         for ce_solver in ce_solvers:
             label = ce_solver(base_clusters, nclass)
