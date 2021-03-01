@@ -259,7 +259,7 @@ def cluster_ensembles(base_clusters, nclass=None, solver='hbgf', verbose=False):
 
     if solver == 'cspa':
         if base_clusters.shape[1] > 5000:
-            warnings.warn('`base_clusters.shape[1]` is too large, so use another solvers.')
+            warnings.warn('`base_clusters.shape[1]` is too large, so the use of another solvers is recommended.')
         celabel = cspa(base_clusters, nclass)
     elif solver == 'mcla':
         celabel = mcla(base_clusters, nclass)
