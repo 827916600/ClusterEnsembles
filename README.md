@@ -57,6 +57,11 @@ Simple example of cluster ensembles in the reference [1]
     `all`: Use all solvers, and then return the consensus clustering label with the smallest objective function value. 
 
     **Note:** Please use `hbgf` for large-scale `base_clusters`.
+    
+Example
+-------
+
+`tsano430/egnmf`: https://github.com/tsano430/egnmf
 
 Similar Package
 ---------------
