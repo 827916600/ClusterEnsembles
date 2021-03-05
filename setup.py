@@ -35,7 +35,12 @@ setup(
         'Operating System :: POSIX', 
     ],
 
-    package_data={'ClusterEnsembles': ['kahypar_config/*']},
+    package_data={
+        'ClusterEnsembles': [
+            'kahypar_config/*',
+            'tests/data/*'
+            ]
+    },
 
     install_requires=parse_requirements_file('requirements.txt')
 )
