@@ -320,9 +320,9 @@ def cluster_ensembles(base_clusters, nclass=None, solver='hbgf', verbose=False):
         celabel = nmf(base_clusters, nclass)
     elif solver == 'all':
         if base_clusters.shape[1] > 5000:
-            ce_solvers = [mcla, hbgf, nmf]
+            ce_solvers = [hgpa, mcla, hbgf]
         else:
-            ce_solvers = [cspa, mcla, hbgf, nmf]
+            ce_solvers = [cspa, hgpa, mcla, hbgf, nmf]
         best_objv = None
         for ce_solver in ce_solvers:
             label = ce_solver(base_clusters, nclass)
