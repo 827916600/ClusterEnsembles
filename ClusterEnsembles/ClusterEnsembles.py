@@ -349,7 +349,7 @@ def cluster_ensembles(base_clusters, nclass=None, solver='hbgf', random_state=No
             if best_objv is None:
                 best_objv = objv
                 celabel = label
-            if best_objv > objv:
+            if best_objv < objv:
                 best_objv = objv
                 celabel = label
     else:
