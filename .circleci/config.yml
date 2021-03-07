@@ -2,9 +2,49 @@
 version: 2
 
 jobs:
-  build-and-test:
+  build-and-test-3.8:
     docker:
       - image: circleci/python:3.8.7
+
+    steps:
+      - checkout      
+      - restore_cache:
+          keys:
+            - pip--{{ checksum "requirements.txt" }}
+      - run:
+          name: Install dependencies
+          command: pip install --user -r requirements.txt
+      - save_cache:
+          key: pip--{{ checksum "requirements.txt" }}
+          paths: /home/circleci/.local/bin/
+
+      - run:
+          command: python -m unittest -v
+          name: Test
+          
+  build-and-test-3.7:
+    docker:
+      - image: circleci/python:3.7.10
+
+    steps:
+      - checkout      
+      - restore_cache:
+          keys:
+            - pip--{{ checksum "requirements.txt" }}
+      - run:
+          name: Install dependencies
+          command: pip install --user -r requirements.txt
+      - save_cache:
+          key: pip--{{ checksum "requirements.txt" }}
+          paths: /home/circleci/.local/bin/
+
+      - run:
+          command: python -m unittest -v
+          name: Test 
+
+  build-and-test-3.6:
+    docker:
+      - image: circleci/python:3.6.13
 
     steps:
       - checkout      
@@ -26,4 +66,6 @@ workflows:
   version: 2
   main:
     jobs:
-      - build-and-test
+      - build-and-test-3.8
+      - build-and-test-3.7
+      - build-and-test-3.6
