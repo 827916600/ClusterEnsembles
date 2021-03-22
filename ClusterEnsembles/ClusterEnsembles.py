@@ -285,6 +285,7 @@ def calc_objective(base_clusters, consensus_cluster):
     for bc in base_clusters:
         idx = np.isfinite(bc)
         objv += normalized_mutual_info_score(consensus_cluster[idx], bc[idx], average_method='geometric')
+    objv /= base_clusters.shape[0]
     return objv
 
 
@@ -311,17 +312,20 @@ def cluster_ensembles(base_clusters, nclass=None, solver='hbgf', random_state=No
 
     if verbose:
         print('Cluster Ensembles')
-        print('    - number of classes: ', nclass)
-        print('    - solver: ', solver)
-        print('    - length of base clustering labels: ', base_clusters.shape[1])
-        print('    - number of base clusters: ', base_clusters.shape[0])
+        print('    - number of classes:', nclass)
+        print('    - solver:', solver)
+        print('    - length of base clustering labels:', base_clusters.shape[1])
+        print('    - number of base clusters:', base_clusters.shape[0])
 
     if not (isinstance(nclass, int) and nclass > 0):
         raise ValueError('Number of class must be a positive integer; got (nclass={})'.format(nclass))
 
-    if not ( (random_state is None) or (isinstance(random_state, int) and random_state >= 0) ):
+    if not ( (random_state is None) or isinstance(random_state, int) ):
         raise ValueError('Number of random_state must be a nonnegative integer; got (random_state={})'.format(random_state))
-
+    
+    if isinstance(random_state, int):
+        random_state = abs(random_state)
+    
     if solver == 'cspa':
         if base_clusters.shape[1] > 5000:
             warnings.warn('`base_clusters.shape[1]` is too large, so the use of another solvers is recommended.')
@@ -335,23 +339,31 @@ def cluster_ensembles(base_clusters, nclass=None, solver='hbgf', random_state=No
     elif solver == 'nmf':
         celabel = nmf(base_clusters, nclass, random_state)
     elif solver == 'all':
-        if base_clusters.shape[1] > 5000:
-            ce_solvers = [hgpa, mcla, hbgf]
-        else:
-            ce_solvers = [cspa, hgpa, mcla, hbgf, nmf]
+        if verbose:
+                print('    - ANMI:')
+        ce_solvers = {'hgpa': hgpa, 'mcla': mcla, 'hbgf': hbgf}
+        if base_clusters.shape[1] <= 5000:
+            ce_solvers['cspa'] = cspa
+            ce_solvers['nmf'] = nmf
         best_objv = None
-        for ce_solver in ce_solvers:
+        for name, ce_solver in ce_solvers.items():
             if ce_solver == cspa or ce_solver == hbgf:
                 label = ce_solver(base_clusters, nclass)
             else:
                 label = ce_solver(base_clusters, nclass, random_state)
             objv = calc_objective(base_clusters, label)
+            if verbose:
+                print('        -', name, ':', objv)
             if best_objv is None:
                 best_objv = objv
+                best_solver = name
                 celabel = label
             if best_objv < objv:
                 best_objv = objv
+                best_solver = name
                 celabel = label
+        if verbose:
+            print('    - Best solver:', best_solver)
     else:
         raise ValueError("Invalid solver parameter: got '{}' instead of one of ('cspa', 'hgpa', 'mcla', 'hbgf', 'nmf', 'all')".format(solver))
 
