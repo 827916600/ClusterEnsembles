@@ -53,23 +53,23 @@ Simple example of cluster ensembles in the reference [1].
 
 - `solver`: *{'cspa', 'hgpa', 'mcla', 'hbgf', 'nmf', 'all'}, default='hbgf'*
     
-    `cspa`: Cluster-based Similarity Partitioning Algorithm [1].
+    'cspa': Cluster-based Similarity Partitioning Algorithm [1].
 
-    `hgpa`: HyperGraph Partitioning Algorithm [1].
+    'hgpa': HyperGraph Partitioning Algorithm [1].
 
-    `mcla`: Meta-CLustering Algorithm [1].
+    'mcla': Meta-CLustering Algorithm [1].
     
-    `hbgf`: Hybrid Bipartite Graph Formulation [2].
+    'hbgf': Hybrid Bipartite Graph Formulation [2].
 
-    `nmf`: NMF-based consensus clustering [4].
+    'nmf': NMF-based consensus clustering [4].
 
-    `all`: The consensus clustering label with the largest objective function value [1] is returned among the results of all solvers. 
+    'all': The consensus clustering label with the largest objective function value [1] is returned among the results of all solvers. 
     
     <p align="center">
       <img width="600" src="https://user-images.githubusercontent.com/60049342/110207481-14f31a00-7ec7-11eb-96cf-4e03a6ad8990.png">
     </p>
 
-    **Note:** Please use `hbgf` for large-scale `base_clusters`.
+    **Note:** Please use 'hbgf' for large-scale `base_clusters`.
 
 - `random_state`: *int, default=None*
   
