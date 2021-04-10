@@ -4,15 +4,17 @@ from setuptools import setup, find_packages
 VERSION = '0.2.2'
 __version__ = VERSION
 
+
 def parse_requirements_file(filename):
     with open(filename) as f:
         requires = [l.strip() for l in f.readlines() if not l.startswith("#")]
     return requires
 
+
 setup(
     name='ClusterEnsembles',  
     version=__version__,  
-    packages=find_packages(),  
+    packages=find_packages(exclude=('tests',)), 
 
     author='Takehiro Sano',  
     author_email='tsano430@gmail.com',  
@@ -38,7 +40,6 @@ setup(
     package_data={
         'ClusterEnsembles': [
             'kahypar_config/*',
-            'tests/data/*'
             ]
     },
 

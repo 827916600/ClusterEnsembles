@@ -1,8 +1,4 @@
-# Include the README
-include *.md
-
-# Include the license file
+include README.md
 include LICENSE
-
-# Include setup.py
 include setup.py
+include requirements.txt

@@ -6,6 +6,7 @@
 
 import os
 import warnings
+from typing import Optional
 import numpy as np
 import pymetis
 import kahypar
@@ -289,7 +290,12 @@ def calc_objective(base_clusters, consensus_cluster):
     return objv
 
 
-def cluster_ensembles(base_clusters, nclass=None, solver='hbgf', random_state=None, verbose=False):
+def cluster_ensembles(
+    base_clusters:np.ndarray, 
+    nclass:Optional[int]=None, 
+    solver:str='hbgf', 
+    random_state:Optional[int]=None, 
+    verbose:bool=False) -> np.ndarray:
     """Generate a single consensus cluster using base clusters obtained from multiple clustering algorithms
     
     Parameters
