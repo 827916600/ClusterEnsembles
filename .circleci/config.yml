@@ -62,26 +62,6 @@ jobs:
           command: python -m unittest -v
           name: Test 
 
-  build-and-test-3.6:
-    docker:
-      - image: circleci/python:3.6.13
-
-    steps:
-      - checkout      
-      - restore_cache:
-          keys:
-            - pip--{{ checksum "requirements.txt" }}
-      - run:
-          name: Install dependencies
-          command: pip install --user -r requirements.txt
-      - save_cache:
-          key: pip--{{ checksum "requirements.txt" }}
-          paths: /home/circleci/.local/bin/
-
-      - run:
-          command: python -m unittest -v
-          name: Test
-
 workflows:
   version: 2
   main:
@@ -89,4 +69,3 @@ workflows:
       - build-and-test-3.9
       - build-and-test-3.8
       - build-and-test-3.7
-      - build-and-test-3.6
