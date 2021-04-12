@@ -25,7 +25,7 @@ setup(
     long_description=open('README.md').read(), 
     long_description_content_type='text/markdown',  
 
-    python_requires='>=3.6, <4',
+    python_requires='>=3.7, <4',
     
     classifiers=[  
         'License :: OSI Approved :: MIT License',
