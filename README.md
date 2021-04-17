@@ -7,7 +7,7 @@
 A Python package for cluster ensembles. Cluster ensembles generate a single consensus cluster using base clusters obtained from multiple clustering algorithms. The consensus cluster stably achieves a high clustering performance. 
 
 <p align="center">
-  <img width="600" src="https://user-images.githubusercontent.com/60049342/107722358-17c47a00-6d22-11eb-9040-b13b92f97ba1.png">
+  <img width="600" src="https://user-images.githubusercontent.com/60049342/115107122-deb7b880-9fa3-11eb-98d6-9d1d25bf3ae8.png">
 </p>
 
 Installation
