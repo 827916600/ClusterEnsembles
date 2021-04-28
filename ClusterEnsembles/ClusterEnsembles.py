@@ -192,7 +192,7 @@ def mcla(base_clusters, nclass, random_state):
         meta_clusters[:, v] += H.getcol(i)
 
     # Compete for Objects
-    celabel = np.empty(base_clusters.shape[1])
+    celabel = np.empty(base_clusters.shape[1], dtype=int)
     for i, v in enumerate(meta_clusters):
         v = v.toarray()[0]
         celabel[i] = np.random.choice(np.nonzero(v == np.max(v))[0])
