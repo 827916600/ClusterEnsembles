@@ -78,7 +78,7 @@ Usage
       <img width="600" src="https://user-images.githubusercontent.com/60049342/116185712-20dbb980-a75d-11eb-87cb-ae0e68179674.png">
     </p>
 
-    **Note:** Please use 'hbgf' for large-scale `base_clusters`.
+    **Note:** Please use 'hbgf' for large-scale `labels`.
 
 - `random_state`: *int, default=None*
   
